@@ -21,9 +21,10 @@ def dump(X_file,gt_file,dump_file,X_key,gt_key):
     scaler = MinMaxScaler()
     X = scaler.fit_transform(X)
 
-    gt = gt-1
-
     columns = [str(i) for i in range(X.shape[1])] + ["class"]
     data = np.concatenate((X,gt.reshape(-1,1)), axis=1)
     df = pd.DataFrame(columns=columns, data=data)
+    mapping = {v: i for i, v in enumerate(sorted(df["class"].unique()))}
+    df["class"] = df["class"].map(mapping)
     df.to_csv(dump_file, index=False)
+    return mapping
