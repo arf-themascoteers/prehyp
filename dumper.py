@@ -23,7 +23,7 @@ def dump(X_file,gt_file,dump_file,X_key,gt_key):
 
     gt = gt-1
 
-    columns = ["class"] + [str(i) for i in range(X.shape[1])]
-    data = np.concatenate((gt.reshape(-1,1),X), axis=1)
+    columns = [str(i) for i in range(X.shape[1])] + ["class"]
+    data = np.concatenate((X,gt.reshape(-1,1)), axis=1)
     df = pd.DataFrame(columns=columns, data=data)
     df.to_csv(dump_file, index=False)
