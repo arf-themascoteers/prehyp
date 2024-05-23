@@ -18,8 +18,8 @@ def dump(X_file,gt_file,dump_file,X_key,gt_key):
     gt = gt[mask]
     X = X[mask]
 
-    scaler = MinMaxScaler()
-    X = scaler.fit_transform(X)
+    #scaler = MinMaxScaler()
+    #X = scaler.fit_transform(X)
 
     columns = [str(i) for i in range(X.shape[1])] + ["class"]
     data = np.concatenate((X,gt.reshape(-1,1)), axis=1)
